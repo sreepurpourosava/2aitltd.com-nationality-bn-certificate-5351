@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>নাগরিকত্ব সনদ পত্র - শ্রীপুর পৌরসভা</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
-
+        /* ফন্ট ঠিক করার জন্য: আমরা একটি সাধারণ 'Bangla' ফন্ট ব্যবহার করছি যা অনেক ডিভাইসে থাকে। */
         body {
-            font-family: 'Noto Serif Bengali', serif, Arial, sans-serif;
+            font-family: 'SolaimanLipi', 'AdorshoLipi', 'Noto Serif Bengali', serif, Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
@@ -20,16 +19,29 @@
             width: 750px;
             background: #fff;
             padding: 35px 45px;
-            /* নীল বর্ডার সরিয়ে হালকা ধূসর পাতলা বর্ডার */
             border: 1px solid #ddd;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            position: relative;
+            position: relative; /* জলছাপের জন্য দরকার */
             box-sizing: border-box;
+        }
+
+        /* মাঝের জলছাপ মাঝবরাবর রাখার জন্য সংশোধন */
+        .seal-watermark {
+            position: absolute;
+            top: 50%; /* কন্টেইনারের ৫০০০% উপরে */
+            left: 50%; /* কন্টেইনারের ৫০% বামে */
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            opacity: 0.15; /* জলছাপের জন্য উজ্জ্বলতা কমানো হলো */
+            transform: translate(-50%, -50%); /* নিজের আকারের অর্ধেক বামে ও উপরে সরিয়ে কেন্দ্রবিন্দু করা */
+            z-index: 1; /* অন্যান্য কন্টেন্টের নিচে রাখতে */
+            pointer-events: none; /* জলছাপের ওপর ক্লিক করা যাবে না */
         }
 
         .content {
             position: relative;
-            z-index: 2;
+            z-index: 2; /* জলছাপের ওপরে কন্টেন্ট দেখানোর জন্য */
         }
 
         /* হেডার */
@@ -126,21 +138,9 @@
             object-fit: cover;
         }
 
-        /* তথ্য অংশ - সবুজ গোলাকার সীলমোহর ওয়াটারমার্ক সহ */
+        /* তথ্য অংশ */
         .details-wrap {
             position: relative;
-        }
-
-        .details-wrap .seal-watermark {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 260px;
-            height: 260px;
-            border-radius: 50%;
-            opacity: 0.45;
-            z-index: 1;
-            pointer-events: none;
         }
 
         /* তথ্য টেবিল */
@@ -211,6 +211,9 @@
 <body>
 
 <div class="certificate">
+    <!-- মাঝের জলছাপ - কন্টেন্টের বাইরে কিন্তু সনদের ভেতরে -->
+    <img src="logo.png" class="seal-watermark" alt="সীলমোহর">
+
     <div class="content">
         <!-- হেডার অংশ -->
         <div class="header">
@@ -219,13 +222,11 @@
                 <img src="logo.png" class="header-logo" alt="শ্রীপুর পৌরসভা">
                 <div class="issue-date">তারিখঃ ২০২৬-০৭-২২</div>
             </div>
-
             <div class="header-center">
                 <h2>শ্রীপুর পৌরসভা কার্যালয়</h2>
                 <h3>শ্রীপুর, গাজীপুর।</h3>
                 <p>স্থাপিতঃ ২০০০ খ্রিঃ</p>
             </div>
-
             <div>
                 <!-- বাংলাদেশ সরকার লোগো -->
                 <img src="gov.png" class="header-logo" alt="বাংলাদেশ সরকার">
@@ -245,7 +246,6 @@
                     <div class="box">২</div><div class="box">০</div><div class="box">২</div><div class="box">৬</div><div class="box">০</div><div class="box">০</div><div class="box">০</div><div class="box">০</div><div class="box">০</div><div class="box">০</div><div class="box">০</div><div class="box">০</div><div class="box">০</div><div class="box">০</div><div class="box">৫</div><div class="box">৩</div><div class="box">৫</div><div class="box">১</div>
                 </div>
             </div>
-
             <!-- প্রার্থীর ছবি -->
             <img src="khorshed.jpg" class="user-photo" alt="ছবি">
         </div>
@@ -254,7 +254,6 @@
         <p style="font-size: 14px; margin-bottom: 8px;">এই মর্মে প্রত্যয়ন করা যাচ্ছে যে,</p>
 
         <div class="details-wrap">
-            <img src="logo.png" class="seal-watermark" alt="সীলমোহর">
             <table class="details-table">
                 <tr>
                     <td class="label-col">নাম</td>
@@ -279,10 +278,10 @@
                 <tr>
                     <td class="label-col">ঠিকানা</td>
                     <td class="colon-col">:</td>
-                    <td>
+                    <td> 
                         হোন্ডিং নং: ১৯২<br>
                         ব্লক নং: এইচ<br>
-                        মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>
+                        মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>
                         ওয়ার্ড নং: ০৮<br>
                         ডাকঘর: মাওনা বাজার<br>
                         শ্রীপুর পৌরসভা, গাজীপুর।
@@ -311,6 +310,7 @@
             <div>Copyright © 2022-2026 <a href="https://sreepur-pourashava.2aitltd.com" target="_blank" style="color:#008a3e; font-weight:bold; text-decoration:none;">শ্রীপুর পৌরসভা</a> . All rights reserved.</div>
             <div>Design & Developed By <strong>2A IT LIMITED</strong></div>
         </div>
+
     </div>
 </div>
 
