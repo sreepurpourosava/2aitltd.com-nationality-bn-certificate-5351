@@ -374,7 +374,7 @@
         {
             certNo: "২০২৬০০০০০০০২৬২২",
             date: "২০২৬-০৭-২৯",
-            photo: "humayun.jpg", // ছবি ফাইল নাম
+            photo: "humayun.jpg",
             name: "মোঃ হুমায়ুন কবির",
             father: "রমজান মিয়া",
             mother: "মোছাঃ কুলসুম আক্তার",
@@ -405,8 +405,9 @@
 
     // ইংরেজি সংখ্যাকে বাংলায় রূপান্তর করার ফাংশন
     function convertToBanglaDigit(str) {
+        if(!str) return '';
         const enToBn = {'0':'০', '1':'১', '2':'২', '3':'৩', '4':'৪', '5':'৫', '6':'৬', '7':'৭', '8':'৮', '9':'৯'};
-        return str.replace(/[0-9]/g, match => enToBn[match]);
+        return str.toString().replace(/[0-9]/g, match => enToBn[match]);
     }
 
     // ডাটা স্ক্রিনে দেখানোর ফাংশন
@@ -438,16 +439,13 @@
             return;
         }
 
-        // ইংরেজি সংখ্যাকে বাংলায় কনভার্ট করা
         const query = convertToBanglaDigit(rawQuery).toLowerCase();
 
         const result = citizens.find(c => {
-            // পুরো নম্বর বা নামের মধ্যে খুঁজবে
             const matchesFull = c.certNo.includes(query) || 
                                 c.name.toLowerCase().includes(query) || 
                                 c.birthReg.includes(query);
 
-            // সনদ নম্বর বা জন্ম নিবন্ধনের শেষ ৪ ডিজিট মেলাবে
             const certLast4 = c.certNo.slice(-4);
             const birthLast4 = c.birthReg.slice(-4);
             const matchesLast4 = (query === certLast4) || (query === birthLast4);
@@ -462,15 +460,29 @@
         }
     }
 
-    // এন্টার (Enter) বাটন প্রেস করলেও যেন সার্চ হয়
+    // ইউআরএল (URL) থেকে আইডি পড়ার ফাংশন
+    function loadFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchId = urlParams.get('id') || urlParams.get('cert');
+
+        if (searchId) {
+            document.getElementById('searchInput').value = searchId;
+            searchCitizen();
+        } else {
+            // লিঙ্ক না থাকলে ডিফল্টভাবে ১ম ব্যক্তির তথ্য দেখাবে
+            displayCitizenData(citizens[0]);
+        }
+    }
+
+    // এন্টার (Enter) বাটন প্রেস করলেও সার্চ হবে
     document.getElementById('searchInput').addEventListener('keyup', function(event) {
         if (event.key === 'Enter') {
             searchCitizen();
         }
     });
 
-    // ডিফল্টভাবে সদ্য যুক্ত করা মোঃ হুমায়ুন কবির-এর ডাটা দেখাবে
-    displayCitizenData(citizens[0]);
+    // পেজ লোড হলে ইউআরএল চেক করবে
+    window.onload = loadFromUrl;
 </script>
 
 </body>
