@@ -253,7 +253,6 @@
             color: #555;
         }
 
-        /* প্রিন্টের সময় সার্চবার লুকিয়ে ফেলার সিএসএস */
         @media print {
             .search-container {
                 display: none;
@@ -288,7 +287,7 @@
         <div class="header">
             <div>
                 <img src="logo.png" class="header-logo" alt="শ্রীপুর পৌরসভা">
-                <div class="issue-date" id="issueDate">তারিখঃ ২০২৫-০১-২০</div>
+                <div class="issue-date" id="issueDate">তারিখঃ --</div>
             </div>
             <div class="header-center">
                 <h2>শ্রীপুর পৌরসভা কার্যালয়</h2>
@@ -308,10 +307,10 @@
             <div class="cert-num-container">
                 নাগরিকত্ব সনদপত্র নংঃ
                 <div class="boxes" id="certNoBoxes">
-                    <!-- ঘরগুলো জাভাস্ক্রিপ্ট থেকে জেনারেট হবে -->
+                    <!-- ঘরগুলো জাভাস্ক্রিপ্ট থেকে ফিল হবে -->
                 </div>
             </div>
-            <img src="khorshed.jpg" id="userPhoto" class="user-photo" alt="ছবি">
+            <img src="" id="userPhoto" class="user-photo" alt="ছবি">
         </div>
 
         <p style="font-size: 14px; margin-bottom: 8px;">এই মর্মে প্রত্যয়ন করা যাচ্ছে যে,</p>
@@ -370,8 +369,18 @@
 </div>
 
 <script>
-    // একাধিক ব্যক্তির ডাটা বেস (এখানে নতুন ব্যক্তি যোগ করতে পারবেন)
+    // একাধিক ব্যক্তির ডাটাবেস
     const citizens = [
+        {
+            certNo: "২০২৫০০০০০২০৪৩৬",
+            date: "২০২৬-০৭-২৯",
+            photo: "rifat.jpg", // ছবি ফাইল নাম
+            name: "মোঃ রিফাত মৃধা",
+            father: "মোঃ কাইয়ুম",
+            mother: "মোছাঃ রিনা",
+            birthReg: "২০০৫৭৩২৫৫০৮১৬৭৩৯৫",
+            address: "মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮, ব্লক-জি, হোল্ডিং নং- ২০৪<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
+        },
         {
             certNo: "২০২৬০০০০০১০৫৩৫১",
             date: "২০২৫-০১-২০",
@@ -385,7 +394,7 @@
         {
             certNo: "২০২৬০০০০০১০৫৩৫২",
             date: "২০২৫-০২-১৫",
-            photo: "https://via.placeholder.com/95x115", // দ্বিতীয় ব্যক্তির ছবির লিংক
+            photo: "https://via.placeholder.com/95x115",
             name: "মো: রফিকুল ইসলাম",
             father: "মো: আজাহার আলী",
             mother: "ফাতিমা বেগম",
@@ -404,7 +413,7 @@
         document.getElementById('address').innerHTML = data.address;
         document.getElementById('userPhoto').src = data.photo;
 
-        // সনদ নং বক্সে ভাগ করে দেওয়া
+        // সনদ নং বক্সে বসানো
         const boxesContainer = document.getElementById('certNoBoxes');
         boxesContainer.innerHTML = '';
         for (let char of data.certNo) {
@@ -436,7 +445,7 @@
         }
     }
 
-    // প্রথমবার পেজ লোড হলে ১ম ব্যক্তির ডাটা দেখাবে
+    // ডিফল্টভাবে নতুন যুক্ত করা রিফাত মৃধার ডাটা দেখাবে
     displayCitizenData(citizens[0]);
 </script>
 
