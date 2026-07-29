@@ -3,487 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>নাগরিকত্ব সনদ পত্র - শ্রীপুর পৌরসভা</title>
+    <title>নাগরিকত্ব সনদপত্র যাচাই - শ্রীপুর পৌরসভা</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalpurush&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'SolaimanLipi', 'AdorshoLipi', 'Noto Serif Bengali', serif, Arial, sans-serif;
-            background-color: #eef2f5;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Kalpurush', 'Noto Serif Bengali', serif;
+            background-color: #f4f6f9;
+            color: #333;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        /* সার্চবার এরিয়া */
+        /* Search Section */
         .search-container {
-            width: 750px;
-            background: #fff;
-            padding: 15px;
-            margin-bottom: 20px;
+            background: #ffffff;
+            padding: 20px 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .search-container h2 {
+            margin-bottom: 15px;
+            color: #006a4e;
+        }
+
+        .search-box {
             display: flex;
             gap: 10px;
-            box-sizing: border-box;
+            justify-content: center;
         }
 
-        .search-input {
-            flex: 1;
+        .search-box input {
             padding: 10px 15px;
-            font-size: 15px;
+            font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            outline: none;
+            width: 60%;
+            font-family: inherit;
         }
 
-        .search-btn {
+        .search-box button {
             padding: 10px 20px;
-            background-color: #008a3e;
+            font-size: 16px;
+            background-color: #006a4e;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 15px;
-            font-weight: bold;
+            font-family: inherit;
         }
 
-        .search-btn:hover {
-            background-color: #006b30;
+        .search-box button:hover {
+            background-color: #00523d;
         }
 
-        /* প্রিন্ট বাটন */
         .print-btn {
-            padding: 10px 20px;
-            background-color: #bd0000;
+            margin-top: 15px;
+            padding: 8px 18px;
+            background-color: #2b5797;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 15px;
-            font-weight: bold;
         }
 
-        /* সার্টিফিকেট স্টাইল */
-        .certificate {
-            width: 750px;
+        /* Certificate Container */
+        .certificate-container {
             background: #fff;
-            padding: 35px 45px;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
             position: relative;
-            box-sizing: border-box;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+            border: 1px solid #ddd;
+            overflow: hidden;
         }
 
-        .seal-watermark {
+        /* Watermark Background */
+        .watermark {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            opacity: 0.12;
             transform: translate(-50%, -50%);
+            width: 380px;
+            opacity: 0.12;
             z-index: 1;
             pointer-events: none;
         }
 
-        .content {
+        .cert-content {
             position: relative;
             z-index: 2;
         }
 
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            border-bottom: 2px solid #006a4e;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        .header-logo {
-            width: 75px;
-            height: 75px;
-            object-fit: contain;
+        .header img {
+            width: 70px;
+            height: auto;
         }
 
-        .header-center {
+        .header-title {
             text-align: center;
         }
 
-        .header-center h2 {
-            margin: 0;
-            color: #008a3e;
-            font-size: 22px;
-            font-weight: 700;
+        .header-title h1 {
+            font-size: 26px;
+            color: #006a4e;
+            margin-bottom: 4px;
         }
 
-        .header-center h3 {
-            margin: 4px 0;
-            color: #bd0000;
-            font-size: 16px;
+        .header-title h2 {
+            font-size: 20px;
+            color: #bf212e;
+            margin-bottom: 4px;
         }
 
-        .header-center p {
-            margin: 0;
-            font-size: 12px;
-            color: #333;
+        .header-title p {
+            font-size: 14px;
+            font-weight: bold;
         }
 
         .issue-date {
-            font-size: 12px;
-            margin-top: 15px;
+            font-size: 14px;
+            margin-top: 5px;
         }
 
-        .cert-title {
+        /* Title */
+        .cert-main-title {
             text-align: center;
-            margin: 20px 0 15px 0;
+            margin: 25px 0;
         }
 
-        .cert-title h1 {
-            font-size: 24px;
-            margin: 0;
-            font-weight: 700;
-            color: #000;
+        .cert-main-title h2 {
+            font-size: 28px;
             text-decoration: underline;
-            text-underline-offset: 4px;
+            letter-spacing: 1px;
         }
 
-        .top-info {
+        /* Certificate Info Section */
+        .info-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        .cert-num-container {
-            display: flex;
-            align-items: center;
-            font-size: 13px;
+        .cert-no-box {
+            font-size: 16px;
             font-weight: bold;
-            margin-top: 10px;
         }
 
-        .boxes {
-            display: flex;
-            margin-left: 8px;
-        }
-
-        .box {
-            width: 18px;
-            height: 22px;
+        .cert-no-digits {
+            display: inline-block;
             border: 1px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            margin-right: -1px;
-            background: #fff;
+            padding: 2px 5px;
+            margin-left: 2px;
+            font-family: monospace;
+            font-size: 16px;
         }
 
         .user-photo {
-            width: 95px;
-            height: 115px;
-            border: 1px solid #ccc;
+            width: 110px;
+            height: 130px;
+            border: 1px solid #000;
             object-fit: cover;
         }
 
+        /* Body Details Table */
         .details-table {
             width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-            line-height: 1.7;
-            position: relative;
-            z-index: 2;
+            font-size: 18px;
+            line-height: 2.2;
+            margin-bottom: 30px;
         }
 
         .details-table td {
-            padding: 4px 0;
             vertical-align: top;
         }
 
-        .label-col {
-            width: 120px;
+        .details-table td.label {
+            width: 22%;
+            font-weight: bold;
         }
 
-        .colon-col {
-            width: 20px;
-            text-align: center;
+        .details-table td.colon {
+            width: 3%;
         }
 
-        .statement {
-            margin-top: 20px;
-            font-size: 14px;
+        .declaration {
+            font-size: 17px;
             line-height: 1.8;
+            margin-bottom: 40px;
             text-align: justify;
         }
 
-        .wish {
-            margin-top: 15px;
-            font-size: 14px;
+        /* Footer & Signatures */
+        .footer-section {
+            margin-top: 60px;
         }
 
-        .signature-area {
-            margin-top: 65px;
+        .signature-box {
             text-align: center;
             float: right;
-            width: 200px;
+            width: 250px;
         }
 
-        .sig-line {
-            width: 100%;
-            border-top: 1px dashed #000;
+        .signature-box img {
+            width: 100px;
+            height: auto;
             margin-bottom: 5px;
         }
 
-        .sig-title {
+        .signature-box p {
             font-weight: bold;
-            font-size: 13px;
+            font-size: 16px;
+            border-top: 1px solid #333;
+            padding-top: 5px;
         }
 
-        .clear {
+        .bottom-instructions {
             clear: both;
-        }
-
-        .footer {
-            margin-top: 35px;
-            padding-top: 8px;
-            border-top: 1px dashed #ccc;
+            padding-top: 50px;
             display: flex;
-            justify-content: space-between;
-            font-size: 10px;
-            color: #555;
+            align-items: center;
+            gap: 15px;
+            font-size: 13px;
+            border-top: 1px dashed #ccc;
         }
 
+        .qr-code {
+            width: 75px;
+            height: 75px;
+        }
+
+        .not-found {
+            display: none;
+            color: red;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Print Media Query */
         @media print {
-            .search-container {
-                display: none;
-            }
             body {
-                background-color: #fff;
+                background: none;
                 padding: 0;
             }
-            .certificate {
-                border: none;
+
+            .search-container, .not-found {
+                display: none !important;
+            }
+
+            .certificate-container {
                 box-shadow: none;
+                border: none;
                 width: 100%;
-                padding: 20px;
+                height: 100%;
+                padding: 15mm;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- সার্চ সেকশন -->
-<div class="search-container">
-    <input type="text" id="searchInput" class="search-input" placeholder="সনদ নং / জন্ম নিবন্ধনের শেষ ৪ ডিজিট বা নাম লিখুন (যেমন: ১৬৬৮ বা 1668)...">
-    <button onclick="searchCitizen()" class="search-btn">অনুসন্ধান</button>
-    <button onclick="window.print()" class="print-btn">প্রিন্ট করুন</button>
-</div>
-
-<!-- সার্টিফিকেট সেকশন -->
-<div class="certificate">
-    <img src="logo.png" class="seal-watermark" alt="সীলমোহর">
-
-    <div class="content">
-        <div class="header">
-            <div>
-                <img src="logo.png" class="header-logo" alt="শ্রীপুর পৌরসভা">
-                <div class="issue-date" id="issueDate">তারিখঃ --</div>
-            </div>
-            <div class="header-center">
-                <h2>শ্রীপুর পৌরসভা কার্যালয়</h2>
-                <h3>শ্রীপুর, গাজীপুর।</h3>
-                <p>স্থাপিতঃ ২০০০ খ্রিঃ</p>
-            </div>
-            <div>
-                <img src="gov.png" class="header-logo" alt="বাংলাদেশ সরকার">
-            </div>
+    <!-- Search Section -->
+    <div class="search-container">
+        <h2>শ্রীপুর পৌরসভা - নাগরিকত্ব সনদপত্র অনলাইন নাম বা নম্বর দিয়ে যাচাই</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="সনদ নং / জন্ম নিবন্ধন (শেষ ৪ ডিজিট) / নাম লিখুন">
+            <button onclick="searchCitizen()">খুঁজুন</button>
         </div>
+        <button class="print-btn" onclick="window.print()">প্রিন্ট করুন</button>
+    </div>
 
-        <div class="cert-title">
-            <h1>নাগরিকত্ব সনদ পত্র</h1>
-        </div>
+    <!-- Error Message -->
+    <div id="notFoundMsg" class="not-found">
+        দুঃখিত! এই তথ্য দিয়ে কোনো নাগরিকত্ব সনদ পাওয়া যায়নি।
+    </div>
 
-        <div class="top-info">
-            <div class="cert-num-container">
-                নাগরিকত্ব সনদপত্র নংঃ
-                <div class="boxes" id="certNoBoxes">
-                    <!-- ঘরগুলো জাভাস্ক্রিপ্ট থেকে ফিল হবে -->
+    <!-- Printable Certificate Area -->
+    <div class="certificate-container" id="certArea">
+        <img src="gov.png" alt="Watermark" class="watermark">
+
+        <div class="cert-content">
+            <!-- Header -->
+            <div class="header">
+                <img src="gov.png" alt="Sreepur Logo">
+                <div class="header-title">
+                    <h1>শ্রীপুর পৌরসভা কার্যালয়</h1>
+                    <h2>শ্রীপুর, গাজীপুর।</h2>
+                    <p>স্থাপিত: ২০০০ খ্রি:</p>
                 </div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Government_Seal_of_Bangladesh.svg" alt="BD Seal">
             </div>
-            <img src="" id="userPhoto" class="user-photo" alt="ছবি">
-        </div>
 
-        <p style="font-size: 14px; margin-bottom: 8px;">এই মর্মে প্রত্যয়ন করা যাচ্ছে যে,</p>
+            <div class="issue-date">
+                তারিখ: <span id="issueDate">২০২৬-০৭-২৯</span>
+            </div>
 
-        <div class="details-wrap">
+            <!-- Title -->
+            <div class="cert-main-title">
+                <h2>নাগরিকত্ব সনদ পত্র</h2>
+            </div>
+
+            <!-- Top Info & Photo -->
+            <div class="info-top">
+                <div class="cert-no-box">
+                    নাগরিকত্ব সনদপত্র নং: <span id="certNoBoxes"></span>
+                </div>
+                <img id="userPhoto" src="sujan.jpg" alt="Citizen Photo" class="user-photo">
+            </div>
+
+            <!-- Details -->
+            <p class="declaration">এই মর্মে প্রত্যয়ন করা যাচ্ছে যে,</p>
             <table class="details-table">
                 <tr>
-                    <td class="label-col">নাম</td>
-                    <td class="colon-col">:</td>
-                    <td><strong id="userName">--</strong></td>
+                    <td class="label">নাম</td>
+                    <td class="colon">:</td>
+                    <td id="cName">সুজন মিয়া</td>
                 </tr>
                 <tr>
-                    <td class="label-col">পিতার নাম</td>
-                    <td class="colon-col">:</td>
-                    <td id="fatherName">--</td>
+                    <td class="label">পিতার নাম</td>
+                    <td class="colon">:</td>
+                    <td id="cFather">মোঃ জালাল</td>
                 </tr>
                 <tr>
-                    <td class="label-col">মাতা</td>
-                    <td class="colon-col">:</td>
-                    <td id="motherName">--</td>
+                    <td class="label">মাতা</td>
+                    <td class="colon">:</td>
+                    <td id="cMother">বকুল</td>
                 </tr>
                 <tr>
-                    <td class="label-col">জন্ম নিবন্ধন নং</td>
-                    <td class="colon-col">:</td>
-                    <td id="birthRegNo">--</td>
+                    <td class="label">জন্মনিবন্ধন নং</td>
+                    <td class="colon">:</td>
+                    <td id="cBirthReg">২০০৫৭৩২৫৫০১০৯০৮৬৩</td>
                 </tr>
                 <tr>
-                    <td class="label-col">ঠিকানা</td>
-                    <td class="colon-col">:</td>
-                    <td id="address">--</td>
+                    <td class="label">ঠিকানা</td>
+                    <td class="colon">:</td>
+                    <td id="cAddress">মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৯, ব্লক-বি, হোল্ডিং নং- ৩১৯<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।</td>
                 </tr>
             </table>
-        </div>
 
-        <div class="statement">
-            তিনি আমার পরিচিত। তিনি শ্রীপুর পৌরসভার একজন স্থায়ী বাসিন্দা ও বাংলাদেশের নাগরিক। আমার জানামতে তিনি উত্তম চরিত্রের অধিকারী ও রাষ্ট্র বিরোধী কোনো কাজে লিপ্ত নহেন।
-        </div>
+            <p class="declaration">
+                তিনি আমার পরিচিত। তিনি শ্রীপুর পৌরসভার একজন স্থায়ী বাসিন্দা ও বাংলাদেশের নাগরিক। আমার জানামতে তিনি উত্তম চরিত্রের অধিকারী ও রাষ্ট্র বিরোধী কোনো কাজে লিপ্ত নহেন।
+                <br><br>
+                আমি তাহার জীবনের সর্বাঙ্গীন উন্নতি কামনা করি।
+            </p>
 
-        <div class="wish">
-            আমি তাহার জীবনের সর্বাঙ্গীন উন্নতি কামনা করি।
-        </div>
+            <!-- Signatures & QR -->
+            <div class="footer-section">
+                <div class="signature-box">
+                    <img src="60827230967.jpg" alt="Signature">
+                    <p>প্রশাসক<br>শ্রীপুর পৌরসভা, গাজীপুর।</p>
+                </div>
 
-        <div class="signature-area">
-            <div class="sig-line"></div>
-            <div class="sig-title">প্রশাসক</div>
-            <div style="font-size: 12px;">শ্রীপুর পৌরসভা, গাজীপুর।</div>
-        </div>
+                <div class="bottom-instructions">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sreepurpourosava.github.io" alt="QR Code" class="qr-code">
+                    <div>
+                        নির্দেশাবলী: সার্টিফিকেট QR Code দিয়ে অথবা https://sreepur-pourashava.2aitlimited.com থেকে যাচাই করুন।<br>
+                        পৌরসভার তথ্য: শ্রীপুর পৌরসভা, ০২৯৯-৬৬১৪২১০, sreepurpourashava@gmail.com
+                    </div>
+                </div>
+            </div>
 
-        <div class="clear"></div>
-
-        <div class="footer">
-            <div>Copyright © 2022-2026 <a href="https://sreepur-pourashava.2aitltd.com" target="_blank" style="color:#008a3e; font-weight:bold; text-decoration:none;">শ্রীপুর পৌরসভা</a> . All rights reserved.</div>
-            <div>Design & Developed By <strong>2A IT LIMITED</strong></div>
         </div>
     </div>
-</div>
 
-<script>
-    // একাধিক ব্যক্তির ডাটাবেস
-    const citizens = [
-        {
-            certNo: "২০২৬০০০০০০০২৬২২",
-            date: "২০২৬-০৭-২৯",
-            photo: "humayun.jpg",
-            name: "মোঃ হুমায়ুন কবির",
-            father: "রমজান মিয়া",
-            mother: "মোছাঃ কুলসুম আক্তার",
-            birthReg: "২০০৫৭৩১৮৬৪৭০৮১৬৬৮",
-            address: "মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮, ব্লক-ডি, হোল্ডিং নং- ১০<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
-        },
-        {
-            certNo: "২০২৬০০০০০০০০০০০২৪৩৬",
-            date: "২০২৬-০৭-২৯",
-            photo: "rifat.jpg",
-            name: "মোঃ রিফাত মৃধা",
-            father: "মোঃ কাইয়ুম",
-            mother: "মোছাঃ রিনা",
-            birthReg: "২০০৫৩৩২৫৫০৮১৬৩৯৯৫",
-            address: "মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮, ব্লক-জি, হোল্ডিং নং- ২০৪<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
-        },
-        {
-            certNo: "২০২৬০০০০০১০৫৩৫১",
-            date: "২০২৫-০১-২০",
-            photo: "khorshed.jpg",
-            name: "খোরশেদ আলম পাটোয়ারী",
-            father: "আব্দুল মান্নান পাটোয়ারী",
-            mother: "ছায়েরা খাতুন পাটোয়ারী",
-            birthReg: "১৯৭৫৩০২১৪০২০০৩১৯৯",
-            address: "হোন্ডিং নং: ১৯২<br>ব্লক নং: এইচ<br>মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
-        }
-    ];
+    <!-- JavaScript Data & Logic -->
+    <script>
+        const citizens = [
+            {
+                certNo: "২০২৬০০০০০০০২৪৩৭",
+                date: "২০২৬-০৭-২৯",
+                photo: "sujan.jpg",
+                name: "সুজন মিয়া",
+                father: "মোঃ জালাল",
+                mother: "বকুল",
+                birthReg: "২০০৫৩৩২৫৫০৯০৯০৮৬৩",
+                address: "মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৯, ব্লক-বি, হোল্ডিং নং- ৩১৯<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
+            },
+            {
+                certNo: "২০২৬০০০০০০০২৬২২",
+                date: "২০২৬-০৭-২৯",
+                photo: "humayun.jpg",
+                name: "মোঃ হুমায়ুন কবির",
+                father: "রমজান মিয়া",
+                mother: "মোছাঃ কুলসুম আক্তার",
+                birthReg: "২০০৫৭৩১৮৬৪৭০৮১৬৬৮",
+                address: "মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮, ব্লক-ডি, হোল্ডিং নং- ১০<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
+            },
+            {
+                certNo: "২০২৬০০০০০০০০০০০২৪৩৬",
+                date: "২০২৬-০৭-২৯",
+                photo: "rifat.jpg",
+                name: "মোঃ রিফাত মৃধা",
+                father: "মোঃ কাইয়ুম",
+                mother: "মোছাঃ রিনা",
+                birthReg: "২০০৫৩৩২৫৫০৮১৬৩৯৯৫",
+                address: "মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮, ব্লক-জি, হোল্ডিং নং- ২০৪<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
+            },
+            {
+                certNo: "২০২৬০০০০০১০৫৩৫১",
+                date: "২০২৫-০১-২০",
+                photo: "khorshed.jpg",
+                name: "খোরশেদ আলম পাটোয়ারী",
+                father: "আব্দুল মান্নান পাটোয়ারী",
+                mother: "ছায়েরা খাতুন পাটোয়ারী",
+                birthReg: "১৯৭৫৩০২১৪০২০০৩১৯৯",
+                address: "হোন্ডিং নং: ১৯২<br>ব্লক নং: এইচ<br>মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
+            }
+        ];
 
-    // ইংরেজি সংখ্যাকে বাংলায় রূপান্তর করার ফাংশন
-    function convertToBanglaDigit(str) {
-        if(!str) return '';
-        const enToBn = {'0':'০', '1':'১', '2':'২', '3':'৩', '4':'৪', '5':'৫', '6':'৬', '7':'৭', '8':'৮', '9':'৯'};
-        return str.toString().replace(/[0-9]/g, match => enToBn[match]);
-    }
+        function displayData(data) {
+            document.getElementById('notFoundMsg').style.display = 'none';
+            document.getElementById('certArea').style.display = 'block';
 
-    // ডাটা স্ক্রিনে দেখানোর ফাংশন
-    function displayCitizenData(data) {
-        document.getElementById('issueDate').innerText = "তারিখঃ " + data.date;
-        document.getElementById('userName').innerText = data.name;
-        document.getElementById('fatherName').innerText = data.father;
-        document.getElementById('motherName').innerText = data.mother;
-        document.getElementById('birthRegNo').innerText = data.birthReg;
-        document.getElementById('address').innerHTML = data.address;
-        document.getElementById('userPhoto').src = data.photo;
+            document.getElementById('issueDate').innerText = data.date;
+            document.getElementById('userPhoto').src = data.photo;
+            document.getElementById('cName').innerText = data.name;
+            document.getElementById('cFather').innerText = data.father;
+            document.getElementById('cMother').innerText = data.mother;
+            document.getElementById('cBirthReg').innerText = data.birthReg;
+            document.getElementById('cAddress').innerHTML = data.address;
 
-        // সনদ নং বক্সে বসানো
-        const boxesContainer = document.getElementById('certNoBoxes');
-        boxesContainer.innerHTML = '';
-        for (let char of data.certNo) {
-            const box = document.createElement('div');
-            box.className = 'box';
-            box.innerText = char;
-            boxesContainer.appendChild(box);
-        }
-    }
-
-    // সার্চ ফাংশন
-    function searchCitizen() {
-        let rawQuery = document.getElementById('searchInput').value.trim();
-        if (!rawQuery) {
-            alert("অনুগ্রহ করে খোঁজার জন্য নাম বা নম্বর লিখুন!");
-            return;
+            // Certificate Number Box Format
+            let certBoxes = '';
+            for(let char of data.certNo) {
+                certBoxes += `<span class="cert-no-digits">${char}</span>`;
+            }
+            document.getElementById('certNoBoxes').innerHTML = certBoxes;
         }
 
-        const query = convertToBanglaDigit(rawQuery).toLowerCase();
+        function searchCitizen() {
+            const query = document.getElementById('searchInput').value.trim();
+            if(!query) return;
 
-        const result = citizens.find(c => {
-            const matchesFull = c.certNo.includes(query) || 
-                                c.name.toLowerCase().includes(query) || 
-                                c.birthReg.includes(query);
+            const result = citizens.find(c => 
+                c.certNo.includes(query) || 
+                c.birthReg.endsWith(query) || 
+                c.birthReg.includes(query) || 
+                c.name.includes(query)
+            );
 
-            const certLast4 = c.certNo.slice(-4);
-            const birthLast4 = c.birthReg.slice(-4);
-            const matchesLast4 = (query === certLast4) || (query === birthLast4);
-
-            return matchesFull || matchesLast4;
-        });
-
-        if (result) {
-            displayCitizenData(result);
-        } else {
-            alert("কোন তথ্য পাওয়া যায়নি!");
+            if(result) {
+                displayData(result);
+            } else {
+                document.getElementById('certArea').style.display = 'none';
+                document.getElementById('notFoundMsg').style.display = 'block';
+            }
         }
-    }
 
-    // ইউআরএল (URL) থেকে আইডি পড়ার ফাংশন
-    function loadFromUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const searchId = urlParams.get('id') || urlParams.get('cert');
+        // Handle URL Parameters (e.g. ?id=2437 or ?id=0863)
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
 
-        if (searchId) {
-            document.getElementById('searchInput').value = searchId;
-            searchCitizen();
-        } else {
-            // লিঙ্ক না থাকলে ডিফল্টভাবে ১ম ব্যক্তির তথ্য দেখাবে
-            displayCitizenData(citizens[0]);
-        }
-    }
-
-    // এন্টার (Enter) বাটন প্রেস করলেও সার্চ হবে
-    document.getElementById('searchInput').addEventListener('keyup', function(event) {
-        if (event.key === 'Enter') {
-            searchCitizen();
-        }
-    });
-
-    // পেজ লোড হলে ইউআরএল চেক করবে
-    window.onload = loadFromUrl;
-</script>
-
+            if(id) {
+                const result = citizens.find(c => 
+                    c.certNo.endsWith(id) || 
+                    c.birthReg.endsWith(id) || 
+                    c.certNo.includes(id) ||
+                    c.birthReg.includes(id)
+                );
+                if(result) {
+                    displayData(result);
+                    return;
+                }
+            }
+            // Default first record show
+            displayData(citizens[0]);
+        };
+    </script>
 </body>
 </html>
