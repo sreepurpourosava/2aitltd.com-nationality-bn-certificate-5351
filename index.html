@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>নাগরিকত্ব সনদ পত্র - শ্রীপুর পৌরসভা</title>
+    <!-- Google Bengali Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'SolaimanLipi', 'AdorshoLipi', 'Noto Serif Bengali', serif, Arial, sans-serif;
+            font-family: 'Noto Sans Bengali', 'SolaimanLipi', 'AdorshoLipi', serif, Arial, sans-serif;
             background-color: #eef2f5;
             margin: 0;
             padding: 20px;
@@ -15,7 +17,7 @@
             align-items: center;
         }
 
-        /* সার্চবার এরিয়া */
+        /* সার্চবার এরিয়া */
         .search-container {
             width: 750px;
             background: #fff;
@@ -35,34 +37,25 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             outline: none;
+            font-family: inherit;
         }
 
-        .search-btn {
+        .search-btn, .print-btn {
             padding: 10px 20px;
-            background-color: #008a3e;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 15px;
             font-weight: bold;
+            font-family: inherit;
         }
 
-        .search-btn:hover {
-            background-color: #006b30;
-        }
+        .search-btn { background-color: #008a3e; }
+        .search-btn:hover { background-color: #006b30; }
 
-        /* প্রিন্ট বাটন */
-        .print-btn {
-            padding: 10px 20px;
-            background-color: #bd0000;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: bold;
-        }
+        .print-btn { background-color: #bd0000; }
+        .print-btn:hover { background-color: #a00000; }
 
         /* সার্টিফিকেট স্টাইল */
         .certificate {
@@ -191,8 +184,6 @@
             border-collapse: collapse;
             font-size: 14px;
             line-height: 1.7;
-            position: relative;
-            z-index: 2;
         }
 
         .details-table td {
@@ -200,14 +191,8 @@
             vertical-align: top;
         }
 
-        .label-col {
-            width: 120px;
-        }
-
-        .colon-col {
-            width: 20px;
-            text-align: center;
-        }
+        .label-col { width: 120px; }
+        .colon-col { width: 20px; text-align: center; }
 
         .statement {
             margin-top: 20px;
@@ -239,9 +224,7 @@
             font-size: 13px;
         }
 
-        .clear {
-            clear: both;
-        }
+        .clear { clear: both; }
 
         .footer {
             margin-top: 35px;
@@ -253,19 +236,17 @@
             color: #555;
         }
 
+        /* প্রিন্ট অপ্টিমাইজেশন */
         @media print {
-            .search-container {
-                display: none;
-            }
-            body {
-                background-color: #fff;
-                padding: 0;
-            }
+            .search-container { display: none; }
+            body { background-color: #fff; padding: 0; }
             .certificate {
                 border: none;
                 box-shadow: none;
                 width: 100%;
                 padding: 20px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
         }
     </style>
@@ -274,7 +255,7 @@
 
 <!-- সার্চ সেকশন -->
 <div class="search-container">
-    <input type="text" id="searchInput" class="search-input" placeholder="সনদ নং / নাম / জন্ম নিবন্ধন নং দিয়ে খুঁজুন...">
+    <input type="text" id="searchInput" class="search-input" placeholder="সনদ নং (যেমন: শেষ ৪ ডিজিট), নাম বা জন্ম নিবন্ধন নং..." onkeypress="handleKeyPress(event)">
     <button onclick="searchCitizen()" class="search-btn">অনুসন্ধান</button>
     <button onclick="window.print()" class="print-btn">প্রিন্ট করুন</button>
 </div>
@@ -290,7 +271,7 @@
                 <div class="issue-date" id="issueDate">তারিখঃ --</div>
             </div>
             <div class="header-center">
-                <h2>শ্রীপুর পৌরসভা কার্যালয়</h2>
+                <h2>শ্রীপুর পৌরসভা কার্যালয়</h2>
                 <h3>শ্রীপুর, গাজীপুর।</h3>
                 <p>স্থাপিতঃ ২০০০ খ্রিঃ</p>
             </div>
@@ -306,14 +287,12 @@
         <div class="top-info">
             <div class="cert-num-container">
                 নাগরিকত্ব সনদপত্র নংঃ
-                <div class="boxes" id="certNoBoxes">
-                    <!-- ঘরগুলো জাভাস্ক্রিপ্ট থেকে ফিল হবে -->
-                </div>
+                <div class="boxes" id="certNoBoxes"></div>
             </div>
             <img src="" id="userPhoto" class="user-photo" alt="ছবি">
         </div>
 
-        <p style="font-size: 14px; margin-bottom: 8px;">এই মর্মে প্রত্যয়ন করা যাচ্ছে যে,</p>
+        <p style="font-size: 14px; margin-bottom: 8px;">এই মর্মে প্রত্যয়ন করা যাচ্ছে যে,</p>
 
         <div class="details-wrap">
             <table class="details-table">
@@ -346,7 +325,7 @@
         </div>
 
         <div class="statement">
-            তিনি আমার পরিচিত। তিনি শ্রীপুর পৌরসভার একজন স্থায়ী বাসিন্দা ও বাংলাদেশের নাগরিক। আমার জানামতে তিনি উত্তম চরিত্রের অধিকারী ও রাষ্ট্র বিরোধী কোনো কাজে লিপ্ত নহেন।
+            তিনি আমার পরিচিত। তিনি শ্রীপুর পৌরসভার একজন স্থায়ী বাসিন্দা ও বাংলাদেশের নাগরিক। আমার জানামতে তিনি উত্তম চরিত্রের অধিকারী ও রাষ্ট্র বিরোধী কোনো কাজে লিপ্ত নহেন।
         </div>
 
         <div class="wish">
@@ -369,41 +348,49 @@
 </div>
 
 <script>
-    // একাধিক ব্যক্তির ডাটাবেস
     const citizens = [
         {
-            certNo: "২০২৬০০০০০০০০০০০২৪৩৬",
+            certNo: "২০২৬০০০০০০০০০০০২৬২২", // শেষ ৪ সংখ্যা: ২৬২২
             date: "২০২৬-০৭-২৯",
-            photo: "rifat.jpg", // ছবি ফাইল নাম
+            photo: "humayun.jpg",
+            name: "মোঃ হুমায়ূন কবির",
+            father: "রমজান মিয়া",
+            mother: "মোছাঃ কুলসুম আক্তার",
+            birthReg: "২০০৫৭৩১৮৬৪৭০৮১৬৬৮",
+            address: "মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮, ব্লক-ডি, হোল্ডিং নং- ১০<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
+        },
+        {
+            certNo: "২০২৬০০০০০০০০০০০২৪৩৬", // শেষ ৪ সংখ্যা: ২৪৩৬
+            date: "২০২৬-০৭-২৯",
+            photo: "rifat.jpg",
             name: "মোঃ রিফাত মৃধা",
             father: "মোঃ কাইয়ুম",
             mother: "মোছাঃ রিনা",
             birthReg: "২০০৫৩৩২৫৫০৮১৬৩৯৯৫",
-            address: "মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮, ব্লক-জি, হোল্ডিং নং- ২০৪<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
+            address: "মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮, ব্লক-জি, হোল্ডিং নং- ২০৪<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
         },
         {
-            certNo: "২০২৬০০০০০১০৫৩৫১",
+            certNo: "২০২৬০০০০০১০৫৩৫১", // শেষ ৪ সংখ্যা: ৫৩৫১
             date: "২০২৫-০১-২০",
             photo: "khorshed.jpg",
             name: "খোরশেদ আলম পাটোয়ারী",
             father: "আব্দুল মান্নান পাটোয়ারী",
             mother: "ছায়েরা খাতুন পাটোয়ারী",
             birthReg: "১৯৭৫৩০২১৪০২০০৩১৯৯",
-            address: "হোন্ডিং নং: ১৯২<br>ব্লক নং: এইচ<br>মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
+            address: "হোন্ডিং নং: ১৯২<br>ব্লক নং: এইচ<br>মহল্লা/রাস্তা: কেওয়া পশ্চিম খন্ড<br>ওয়ার্ড নং: ০৮<br>ডাকঘর: মাওনা বাজার<br>শ্রীপুর পৌরসভা, গাজীপুর।"
         },
         {
-            certNo: "২০২৬০০০০০১০৫৩৫২",
+            certNo: "২০২৬০০০০০১০৫৩৫২", // শেষ ৪ সংখ্যা: ৫৩৫২
             date: "২০২৫-০২-১৫",
             photo: "https://via.placeholder.com/95x115",
             name: "মো: রফিকুল ইসলাম",
             father: "মো: আজাহার আলী",
             mother: "ফাতিমা বেগম",
             birthReg: "১৯৮৮৩০২১৪০২০০৫৮৯০",
-            address: "হোন্ডিং নং: ৪৫<br>ব্লক নং: বি<br>মহল্লা/রাস্তা: শ্রীপুর বাজার<br>ওয়ার্ড নং: ০২<br>ডাকঘর: শ্রীপুর<br>শ্রীপুর পৌরসভা, গাজীপুর।"
+            address: "হোন্ডিং নং: ৪৫<br>ব্লক নং: বি<br>মহল্লা/রাস্তা: শ্রীপুর বাজার<br>ওয়ার্ড নং: ০২<br>ডাকঘর: শ্রীপুর<br>শ্রীপুর পৌরসভা, গাজীপুর।"
         }
     ];
 
-    // ডাটা স্ক্রিনে দেখানোর ফাংশন
     function displayCitizenData(data) {
         document.getElementById('issueDate').innerText = "তারিখঃ " + data.date;
         document.getElementById('userName').innerText = data.name;
@@ -413,7 +400,6 @@
         document.getElementById('address').innerHTML = data.address;
         document.getElementById('userPhoto').src = data.photo;
 
-        // সনদ নং বক্সে বসানো
         const boxesContainer = document.getElementById('certNoBoxes');
         boxesContainer.innerHTML = '';
         for (let char of data.certNo) {
@@ -424,7 +410,6 @@
         }
     }
 
-    // সার্চ ফাংশন
     function searchCitizen() {
         const query = document.getElementById('searchInput').value.trim().toLowerCase();
         if (!query) {
@@ -432,10 +417,11 @@
             return;
         }
 
+        // ইনপুটটি সনদ নং, নাম বা জন্ম নিবন্ধনের যেকোনা অংশের সাথে মিললেই দেখাবে
         const result = citizens.find(c => 
-            c.certNo.includes(query) || 
+            c.certNo.toLowerCase().includes(query) || 
             c.name.toLowerCase().includes(query) || 
-            c.birthReg.includes(query)
+            c.birthReg.toLowerCase().includes(query)
         );
 
         if (result) {
@@ -445,7 +431,13 @@
         }
     }
 
-    // ডিফল্টভাবে নতুন যুক্ত করা রিফাত মৃধার ডাটা দেখাবে
+    function handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            searchCitizen();
+        }
+    }
+
+    // প্রথম তথ্যটি ডিফল্ট হিসেবে প্রদর্শন করবে
     displayCitizenData(citizens[0]);
 </script>
 
